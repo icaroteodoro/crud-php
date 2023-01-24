@@ -1,8 +1,11 @@
 <?php
     require_once './db/connection.php';
+    
     // query para criar banco de dados só pra garantir que não vai dar erro na hora da visualização da página
+    
     $query = 'CREATE TABLE IF NOT EXISTS id19419726_crud.pessoa (id INT NOT NULL AUTO_INCREMENT , nome TEXT NOT NULL , data_nascimento TEXT NOT NULL , genero TEXT NOT NULL , email TEXT NOT NULL , PRIMARY KEY (id))';
     $result = mysqli_query($conn, $query);
+    
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -16,14 +19,31 @@
 <body>
     <?php
         include("./components/header.php");
+        $busca = filter_input(INPUT_POST,('busca'));
+        if($busca){
+            $query = "SELECT * FROM pessoa WHERE NOME LIKE '%{$busca}%'";
+            
+            mysqli_query($conn, $query);
+            $data = mysqli_query($conn, $query);
+            $result = mysqli_fetch_assoc($data);
+            if($result == null){
+                echo '<h1 style="position:absolute;top: 90px;left:30px;">Nenhum resultado encontrado</h1>';
+            }else{
+                echo '<h1 style="position:absolute;top: 90px;left:30px;">Resultado da pesquisa</h1>';
+            }
+        }
     ?>
 
     <div class="container-cards">
         <?php
             $busca = filter_input(INPUT_POST,('busca'));
+            
             // Verificando se há uma busca para renderizar os cards com o nome buscado
+            
             if(!$busca){
+                
                 // Renderização sem a busca
+                
                 $query = 'SELECT * FROM pessoa ORDER BY nome asc';
                 $data = mysqli_query($conn, $query);
                 if($data == false){
@@ -43,7 +63,9 @@
             }
             mysqli_close($conn);
             }else{
+            
                 // Renderização com a busca
+            
                 $query = "SELECT * FROM pessoa WHERE NOME LIKE '%{$busca}%'";
             
                 mysqli_query($conn, $query);
@@ -66,10 +88,7 @@
                 }
                 mysqli_close($conn);
             }
-        ?>
-        
+        ?>     
     </div>
-    
-    
 </body>
 </html>
