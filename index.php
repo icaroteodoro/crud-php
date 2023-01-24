@@ -3,6 +3,7 @@
     // query para criar banco de dados só pra garantir que não vai dar erro na hora da visualização da página
     $query = 'CREATE TABLE IF NOT EXISTS id19419726_crud.pessoa (id INT NOT NULL AUTO_INCREMENT , nome TEXT NOT NULL , data_nascimento TEXT NOT NULL , genero TEXT NOT NULL , email TEXT NOT NULL , PRIMARY KEY (id))';
     $result = mysqli_query($conn, $query);
+    mysqli_close($conn);
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
