@@ -20,13 +20,13 @@
 <div class="menu-horizontal">
         <ul>
             <li><a href="<?php echo $url ?>index.php"><h1>Click</h1></a></li>
-            <li>
+            <li id ="li-form">
                 <form method="POST" action="<?php echo $url ?>index.php">
                     <?php echo $input ?> 
                     <input type="submit" value="Buscar">
                 </form>
             </li>
-            <li><a href="<?php echo $view ?>cadastro.php">Cadastrar Pessoa</a></li>
+            <li><a href="<?php echo $view ?>cadastro.php">Cadastrar</a></li>
             
         </ul>
 </div>
